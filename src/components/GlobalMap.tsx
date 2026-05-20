@@ -167,6 +167,8 @@ const GlobalMap = () => {
         .addTo(map.current!);
     });
 
+    spinGlobe();
+
     return () => {
       if (spinAnimationId !== null) cancelAnimationFrame(spinAnimationId);
       map.current?.remove();
