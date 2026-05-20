@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UberFix - حلول صيانة وتشغيل ذكية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5fb4;
+            --primary-dark: #0d4a9c;
+            --secondary: #26a269;
+            --accent: #e5a50a;
+            --light: #f8f9fa;
+            --dark: #2d2d2d;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7fb;
+            direction: rtl;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #d69409;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--accent);
+            font-size: 2.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e3f2fd 100%);
+            overflow: hidden;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-content h1 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -20px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+        
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Services */
+        .services {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            background-color: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .cta h2:after {
+            background-color: var(--accent);
+        }
+        
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: white;
+                width: 100%;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                text-align: center;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 0 70px;
+            }
+            
+            .features, .how-it-works, .services, .cta {
+                padding: 70px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .hero-btns .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .step {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-tools"></i>
+                <span>UberFix</span>
+            </a>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#how-it-works">كيف يعمل</a></li>
+                <li><a href="#services">الخدمات</a></li>
+                <li><a href="#cta">حمل التطبيق</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>UberFix حلول صيانة وتشغيل ذكية</h1>
+                <p>منصة متكاملة لإدارة طلبات الصيانة من شركة العزب المعمارية. نربط العملاء بالفنيين المحترفين لتوفير أفضل خدمات الصيانة في مصر.</p>
+                <div class="hero-btns">
+                    <a href="#cta" class="btn">حمل التطبيق الآن</a>
+                    <a href="#how-it-works" class="btn btn-outline">كيف يعمل التطبيق</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="UberFix Application">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>مميزات تطبيق UberFix</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>خدمة سريعة</h3>
+                    <p>وصل الفني في أقل من 60 دقيقة لأي طلب صيانة طارئ، مع ضمان السرعة والدقة في التنفيذ.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>فنيين معتمدين</h3>
+                    <p>جميع الفنيين لدينا معتمدون ومدربون وذوي خبرة عالية لضمان جودة الخدمة المقدمة.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>ضمان الجودة</h3>
+                    <p>نضمن جميع خدمات الصيانة لمدة تصل إلى 6 أشهر مع متابعة مستمرة لضمان رضا العملاء.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>أسعار شفافة</h3>
+                    <p>تعرف على السعر مسبقاً قبل تأكيد الطلب دون أي مفاجآت أو رسوم إضافية خفية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>كيف يعمل تطبيق UberFix</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>حمل التطبيق</h3>
+                    <p>قم بتحميل تطبيق UberFix من متجر التطبيقات على هاتفك الذكي.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>اختر الخدمة</h3>
+                    <p>حدد نوع الخدمة التي تحتاجها وموقعك وسنعرض لك الأسعار مسبقاً.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3>اختر الفني</h3>
+                    <p>اختر الفني المناسب بناءً على تقييماته وخبرته وسرعة استجابته.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <h3>استمتع بالخدمة</h3>
+                    <p>استلم خدمتك المميزة وقم بتقييم الفني لمساعدتنا في تحسين الخدمة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>خدماتنا المتكاملة</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الصيانة الكهربائية</h3>
+                        <p>إصلاح الأعطال الكهربائية، تركيب وتغيير اللمبات، تصميم الدوائر الكهربائية.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-faucet"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الصيانة الصحية</h3>
+                        <p>إصلاح تسربات المياه، تركيب وتغيير الحنفيات، صيانة خزانات المياه.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الدهانات والديكور</h3>
+                        <p>خدمات الدهان بجودة عالية، تركيب ورق الحائط، أعمال الديكور المتكاملة.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>صيانة التكييف</h3>
+                        <p>تنظيف وصيانة وحدات التكييف، إصلاح الأعطال، تركيب وحدات جديدة.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الأعمال النجارية</h3>
+                        <p>إصلاح الأبواب والنوافذ، تركيب الأثاث، أعمال النجارة العامة.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الصيانة الشاملة</h3>
+                        <p>خدمات الصيانة الدورية للمنازل والمؤسسات والمتاجر بخطط مخصصة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2>حمل تطبيق UberFix الآن</h2>
+            <p>انضم إلى آلاف العملاء الذين يثقون بنا في حلول الصيانة المعمارية. حمّل التطبيق واطلب الخدمة في دقائق معدودة!</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="#" class="btn btn-accent">
+                    <i class="fab fa-google-play"></i> حمل من Google Play
+                </a>
+                <a href="#" class="btn btn-accent">
+                    <i class="fab fa-app-store"></i> حمل من App Store
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>UberFix</h3>
+                    <p>منصة متكاملة لإدارة طلبات الصيانة من شركة العزب المعمارية. نربط العملاء بالفنيين المحترفين لتوفير أفضل خدمات الصيانة في مصر.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#how-it-works">كيف يعمل</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#cta">حمل التطبيق</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>اتصل بنا</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> مصر - القاهرة - شركة العزب المعمارية</p>
+                        <p><i class="fas fa-phone"></i> 01234567890</p>
+                        <p><i class="fas fa-envelope"></i> info@uberfix.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 UberFix - شركة العزب المعمارية</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Change icon
+            const icon = mobileToggle.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.replace('fa-times', 'fa-bars');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .step, .service-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UberFix - نظام إدارة الصيانة الذكي</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --neon-purple: #a855f7;
+            --neon-blue: #3b82f6;
+            --neon-pink: #ec4899;
+            --neon-green: #10b981;
+            --neon-orange: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #000;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #000000 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Particles Canvas */
+        #particlesCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Parallax Layers */
+        .parallax-layer-2 {
+            z-index: 2;
+        }
+
+        .parallax-layer-3 {
+            z-index: 10;
+        }
+
+        /* Animated Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--neon-purple), transparent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--neon-blue), transparent);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--neon-green), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 14s;
+        }
+
+        .orb-4 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--neon-orange), transparent);
+            top: 20%;
+            right: 20%;
+            animation-delay: 21s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-50px, 50px) scale(0.9);
+            }
+        }
+
+        /* Hero Badge */
+        .hero-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            animation: fadeInDown 1s ease-out 0.2s both;
+        }
+
+        .badge-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(168, 85, 247, 0.3),
+                transparent
+            );
+            animation: shimmer 3s linear infinite;
+        }
+
+        .badge-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Hero Title */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .title-line-1, .title-line-2 {
+            display: inline-block;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .title-line-2 {
+            animation-delay: 0.3s;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #10b981 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+            margin-right: 4px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Hero Subtitle */
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            margin: 3rem auto;
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        /* Hero Buttons */
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        /* Animated Border Button */
+        .animated-border-button {
+            position: relative;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .animated-border-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .animated-border-button:active {
+            transform: translateY(0);
+        }
+
+        .button-border {
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            padding: 2px;
+            background: linear-gradient(
+                90deg,
+                var(--neon-purple),
+                var(--neon-blue),
+                var(--neon-green),
+                var(--neon-purple)
+            );
+            background-size: 300% 100%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 300% center;
+            }
+        }
+
+        .button-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            z-index: 2;
+            transition: background 0.3s ease;
+        }
+
+        .animated-border-button:hover .button-content {
+            background: rgba(168, 85, 247, 0.2);
+        }
+
+        .button-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .animated-border-button:hover .button-icon {
+            transform: translateX(4px);
+        }
+
+        .button-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, var(--neon-purple), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+            filter: blur(20px);
+        }
+
+        .animated-border-button:hover .button-glow {
+            opacity: 0.6;
+        }
+
+        /* Secondary Button */
+        .secondary-button {
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Stats */
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            animation: fadeIn 1s ease-out 1.5s both;
+            z-index: 10;
+        }
+
+        .scroll-mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .scroll-wheel {
+            width: 4px;
+            height: 10px;
+            background: white;
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollWheel {
+            0%, 100% {
+                top: 8px;
+                opacity: 1;
+            }
+            50% {
+                top: 28px;
+                opacity: 0;
+            }
+        }
+
+        .scroll-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Ripple Container */
+        .ripple-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 70%);
+            transform: scale(0);
+            animation: rippleEffect 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Content Sections */
+        .content-section {
+            position: relative;
+            background: black;
+            z-index: 20;
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #667eea, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-text {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--neon-green);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-green);
+        }
+
+        /* How It Works */
+        .steps-container {
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .step-line {
+            position: absolute;
+            top: 0;
+            right: 50%;
+            transform: translateX(50%);
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--neon-green), transparent);
+            z-index: 1;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-left: 2rem;
+            flex-shrink: 0;
+        }
+
+        /* Testimonials */
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(0, 0, 0, 0.9));
+            border-radius: 2rem;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 6rem 0;
+        }
+
+        .cta-gradient-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 5rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--neon-green);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Typing Animation */
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid transparent;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .animated-border-button,
+            .secondary-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+
+            .orb {
+                filter: blur(60px);
+            }
+
+            .feature-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-left: 0;
+                margin-bottom: 1rem;
+            }
+
+            .step-line {
+                display: none;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-purple), var(--neon-green));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #9333ea, #059669);
+        }
+
+        /* Particle Hint */
+        .particle-hint {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            border-radius: 9999px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            z-index: 100;
+            animation: fadeInUp 0.5s ease-out, fadeOut 0.5s ease-out 3s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <canvas id="particlesCanvas" class="particles-canvas"></canvas>
+
+        <div class="parallax-layer-2 absolute inset-0 pointer-events-none">
+            <div class="orb orb-1" id="orb1"></div>
+            <div class="orb orb-2" id="orb2"></div>
+            <div class="orb orb-3" id="orb3"></div>
+            <div class="orb orb-4" id="orb4"></div>
+        </div>
+
+        <div class="parallax-layer-3 relative z-10 max-w-6xl mx-auto px-6 text-center">
+            <!-- Animated Badge -->
+            <div class="hero-badge">
+                <div class="badge-glow"></div>
+                <span class="badge-text">🚀 الجيل القادم من إدارة الصيانة</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="hero-title">
+                <span class="title-line-1">
+                    <span class="gradient-text">UberFix</span>
+                    <span class="cursor" id="cursor1">|</span>
+                </span>
+                <br />
+                <span class="title-line-2">
+                    <span id="typingText"></span>
+                    <span class="cursor" id="cursor2">|</span>
+                </span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle">
+                استمتع بتجربة فريدة في إدارة عقارك التجاري أو السكني. نقدم حلولاً عملية للحفاظ على عقارك في أفضل حالة مع نظام متكامل لإدارة الصيانة.
+            </p>
+
+            <!-- Features -->
+            <div class="features-grid grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
+                <div class="feature-card p-8 bg-white/5 rounded-2xl border border-white/10">
+                    <div class="feature-icon mb-6">🏢</div>
+                    <h3 class="text-2xl font-bold mb-4">إدارة صيانة الفروع</h3>
+                    <p class="text-white/70 text-lg">إدارة مركزية لجميع عمليات الصيانة في فروعك المتعددة</p>
+                </div>
+                
+                <div class="feature-card p-8 bg-white/5 rounded-2xl border border-white/10">
+                    <div class="feature-icon mb-6">👨‍🔧</div>
+                    <h3 class="text-2xl font-bold mb-4">إدارة الفنيين</h3>
+                    <p class="text-white/70 text-lg">تنظيم وتوزيع المهام على الفنيين بكفاءة عالية</p>
+                </div>
+                
+                <div class="feature-card p-8 bg-white/5 rounded-2xl border border-white/10">
+                    <div class="feature-icon mb-6">📋</div>
+                    <h3 class="text-2xl font-bold mb-4">إدارة طلبات الصيانة</h3>
+                    <p class="text-white/70 text-lg">تتبع ومعالجة طلبات الصيانة بسهولة وسرعة</p>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hero-buttons">
+                <!-- Animated Border Button -->
+                <button class="animated-border-button" id="primaryBtn">
+                    <span class="button-border"></span>
+                    <span class="button-content">
+                        <span class="button-text">ابدأ رحلتك الآن</span>
+                        <svg class="button-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </span>
+                    <span class="button-glow"></span>
+                </button>
+
+                <!-- Secondary Button -->
+                <button class="secondary-button">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        شاهد العرض التوضيحي
+                    </span>
+                </button>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value" data-target="99">0</div>
+                    <div class="stat-label">كفاءة الأداء</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-value" data-target="50">0</div>
+                    <div class="stat-label">مستخدم نشط</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-value" data-target="100">0</div>
+                    <div class="stat-label">رضا العملاء</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span class="scroll-text">قم بالتمرير للاستكشاف</span>
+        </div>
+
+        <!-- Ripple Effect Container -->
+        <div id="rippleContainer" class="ripple-container"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="content-section">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title text-center mb-4">خدماتنا المتكاملة</h2>
+            <p class="section-text text-center mb-12">
+                نقدم مجموعة شاملة من الخدمات المصممة خصيصاً لتلبية احتياجات إدارة الصيانة
+            </p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">إدارة المباني</h3>
+                    <p class="text-white/70">إدارة كاملة للمباني السكنية والتجارية مع تتبع حالة الصيانة والتحديثات.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">صيانة وقائية</h3>
+                    <p class="text-white/70">برامج صيانة دورية لمنع الأعطال والحفاظ على جودة الأصول.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">تقارير وتحليلات</h3>
+                    <p class="text-white/70">تقارير تفصيلية وتحليلات ذكية لاتخاذ قرارات صيانة مدروسة.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">تطبيق جوال</h3>
+                    <p class="text-white/70">تطبيق جوال سهل الاستخدام لإدارة الصيانة من أي مكان وفي أي وقت.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="content-section bg-gradient-to-b from-black to-purple-950/20">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="section-title text-center mb-4">كيف يعمل نظامنا</h2>
+            <p class="section-text text-center mb-12">
+                أربع خطوات بسيطة لتحويل إدارة صيانة عقارك إلى تجربة سلسة وفعالة
+            </p>
+            
+            <div class="steps-container">
+                <div class="step-line"></div>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content text-right">
+                        <h3 class="text-2xl font-bold mb-2">تسجيل العقار</h3>
+                        <p class="text-white/70">قم بتسجيل عقارك واضافة تفاصيله في النظام بسهولة.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content text-right">
+                        <h3 class="text-2xl font-bold mb-2">إضافة الفروع والفنيين</h3>
+                        <p class="text-white/70">أضف فروعك والفنيين العاملين لديك وتحديد صلاحيات كل منهم.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content text-right">
+                        <h3 class="text-2xl font-bold mb-2">إدارة الطلبات</h3>
+                        <p class="text-white/70">أنشئ طلبات صيانة جديدة وخصصها للفنيين المناسبين.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content text-right">
+                        <h3 class="text-2xl font-bold mb-2">المتابعة والتقارير</h3>
+                        <p class="text-white/70">تابع حالة الطلبات واحصل على تقارير أداء مفصلة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="content-section">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="section-title text-center mb-4">ماذا يقول عملاؤنا</h2>
+            <p class="section-text text-center mb-12">
+                انضم الآلاف من العملاء إلى تجربة UberFix واختبروا الفرق بأنفسهم
+            </p>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "لقد غير UberFix طريقة إدارتنا للصيانة بشكل كامل. النظام سهل الاستخدام وفعال للغاية. توفير الوقت والجهد كان ملحوظاً من الأيام الأولى."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">أح</div>
+                        <div class="author-info">
+                            <h4 class="text-xl font-bold">أحمد السعدي</h4>
+                            <p class="text-white/60">مدير عقارات، شركة الأماني</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="content-section">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="cta-section">
+                <div class="cta-gradient-bg"></div>
+                <div class="cta-content">
+                    <h2 class="section-title mb-6">جاهز للبدء؟</h2>
+                    <p class="section-text mb-8">
+                        انضم إلى آلاف العملاء الذين يثقون بـ UberFix لإدارة صيانة عقاراتهم. جرب النظام مجاناً لمدة 14 يوماً.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <button class="animated-border-button">
+                            <span class="button-border"></span>
+                            <span class="button-content">
+                                <span class="button-text">ابدأ التجربة المجانية</span>
+                            </span>
+                            <span class="button-glow"></span>
+                        </button>
+                        <button class="secondary-button">
+                            <span class="relative z-10 flex items-center gap-2">
+                                <i class="fas fa-phone"></i>
+                                تواصل معنا
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 gradient-text">UberFix</h2>
+                <p class="text-white/60 max-w-md mx-auto">نظام إدارة الصيانة الذكي الذي يوفر الوقت والجهد ويحافظ على قيمة عقارك</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#services" class="footer-link">الخدمات</a>
+                <a href="#how-it-works" class="footer-link">كيف يعمل</a>
+                <a href="#testimonials" class="footer-link">آراء العملاء</a>
+                <a href="#cta" class="footer-link">الأسعار</a>
+                <a href="#" class="footer-link">المدونة</a>
+                <a href="#" class="footer-link">اتصل بنا</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <div class="text-center pt-8 border-t border-white/10">
+                <p class="text-white/40">© 2024 UberFix. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Particle System
+        class ParticleSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext("2d");
+                this.particles = [];
+                this.particleCount = 150;
+                this.mouse = { x: null, y: null, radius: 150 };
+                this.ripples = [];
+                this.init();
+                this.setupEventListeners();
+                this.animate();
+            }
+
+            init() {
+                this.resize();
+                this.createParticles();
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            createParticles() {
+                this.particles = [];
+                for (let i = 0; i < this.particleCount; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 2 + 1,
+                        speedX: (Math.random() - 0.5) * 0.5,
+                        speedY: (Math.random() - 0.5) * 0.5,
+                        baseX: Math.random() * this.canvas.width,
+                        baseY: Math.random() * this.canvas.height,
+                        density: Math.random() * 30 + 1,
+                        color: this.getRandomColor(),
+                    });
+                }
+            }
+
+            getRandomColor() {
+                const colors = [
+                    "rgba(168, 85, 247, 0.6)",
+                    "rgba(59, 130, 246, 0.6)",
+                    "rgba(16, 185, 129, 0.6)",
+                    "rgba(139, 92, 246, 0.6)",
+                ];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            setupEventListeners() {
+                window.addEventListener("resize", () => this.resize());
+                this.canvas.addEventListener("mousemove", (e) => {
+                    this.mouse.x = e.x;
+                    this.mouse.y = e.y;
+                });
+                this.canvas.addEventListener("mouseleave", () => {
+                    this.mouse.x = null;
+                    this.mouse.y = null;
+                });
+                this.canvas.addEventListener("click", (e) => {
+                    this.createRipple(e.x, e.y);
+                });
+            }
+
+            createRipple(x, y) {
+                this.ripples.push({
+                    x,
+                    y,
+                    radius: 0,
+                    maxRadius: 200,
+                    speed: 3,
+                    opacity: 1,
+                });
+            }
+
+            updateRipples() {
+                this.ripples = this.ripples.filter((ripple) => {
+                    ripple.radius += ripple.speed;
+                    ripple.opacity -= 0.01;
+                    return ripple.opacity > 0;
+                });
+            }
+
+            drawRipples() {
+                this.ripples.forEach((ripple) => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+                    this.ctx.strokeStyle = `rgba(168, 85, 247, ${ripple.opacity * 0.5})`;
+                    this.ctx.lineWidth = 2;
+                    this.ctx.stroke();
+                    const gradient = this.ctx.createRadialGradient(
+                        ripple.x,
+                        ripple.y,
+                        0,
+                        ripple.x,
+                        ripple.y,
+                        ripple.radius
+                    );
+                    gradient.addColorStop(0, `rgba(168, 85, 247, ${ripple.opacity * 0.2})`);
+                    gradient.addColorStop(1, "transparent");
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.fill();
+                });
+            }
+
+            connectParticles() {
+                for (let i = 0; i < this.particles.length; i++) {
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const dx = this.particles[i].x - this.particles[j].x;
+                        const dy = this.particles[i].y - this.particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 120) {
+                            const opacity = 1 - distance / 120;
+                            this.ctx.beginPath();
+                            this.ctx.strokeStyle = `rgba(168, 85, 247, ${opacity * 0.15})`;
+                            this.ctx.lineWidth = 0.5;
+                            this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                            this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                            this.ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            updateParticles() {
+                this.particles.forEach((particle) => {
+                    if (this.mouse.x !== null && this.mouse.y !== null) {
+                        const dx = particle.x - this.mouse.x;
+                        const dy = particle.y - this.mouse.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const maxDistance = this.mouse.radius;
+                        const force = (maxDistance - distance) / maxDistance;
+                        if (distance < this.mouse.radius) {
+                            particle.x += forceDirectionX * force * particle.density;
+                            particle.y += forceDirectionY * force * particle.density;
+                        }
+                    }
+                    const dx = particle.baseX - particle.x;
+                    const dy = particle.baseY - particle.y;
+                    particle.x += dx * 0.05 + particle.speedX;
+                    particle.y += dy * 0.05 + particle.speedY;
+                    if (particle.x < 0 || particle.x > this.canvas.width) {
+                        particle.baseX = Math.random() * this.canvas.width;
+                    }
+                    if (particle.y < 0 || particle.y > this.canvas.height) {
+                        particle.baseY = Math.random() * this.canvas.height;
+                    }
+                });
+            }
+
+            drawParticles() {
+                this.particles.forEach((particle) => {
+                    const gradient = this.ctx.createRadialGradient(
+                        particle.x,
+                        particle.y,
+                        0,
+                        particle.x,
+                        particle.y,
+                        particle.size * 3
+                    );
+                    gradient.addColorStop(0, particle.color);
+                    gradient.addColorStop(1, "transparent");
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size * 3, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.fillStyle = particle.color.replace("0.6", "1");
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.updateParticles();
+                this.updateRipples();
+                this.connectParticles();
+                this.drawParticles();
+                this.drawRipples();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // Typing Effect
+        class TypingEffect {
+            constructor(elementId, text, speed = 100) {
+                this.element = document.getElementById(elementId);
+                this.text = text;
+                this.speed = speed;
+                this.charIndex = 0;
+                this.isDeleting = false;
+                this.waitTime = 1000;
+            }
+
+            async start() {
+                await this.wait(1000);
+                return this.type();
+            }
+
+            async type() {
+                const currentText = this.text.substring(0, this.charIndex);
+                this.element.textContent = currentText;
+                
+                if (!this.isDeleting && this.charIndex < this.text.length) {
+                    this.charIndex++;
+                    await this.wait(this.speed);
+                    return this.type();
+                } else if (!this.isDeleting && this.charIndex === this.text.length) {
+                    await this.wait(this.waitTime);
+                    this.isDeleting = true;
+                    return this.type();
+                } else if (this.isDeleting && this.charIndex > 0) {
+                    this.charIndex--;
+                    await this.wait(this.speed / 2);
+                    return this.type();
+                } else {
+                    this.isDeleting = false;
+                    await this.wait(500);
+                    return this.type();
+                }
+            }
+
+            wait(ms) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+            }
+        }
+
+        // Parallax Effect
+        class ParallaxEffect {
+            constructor() {
+                this.orbs = [
+                    document.getElementById("orb1"),
+                    document.getElementById("orb2"),
+                    document.getElementById("orb3"),
+                    document.getElementById("orb4"),
+                ];
+                this.init();
+            }
+
+            init() {
+                window.addEventListener("scroll", () => this.onScroll());
+                window.addEventListener("mousemove", (e) => this.onMouseMove(e));
+            }
+
+            onScroll() {
+                const scrolled = window.pageYOffset;
+                const canvas = document.getElementById("particlesCanvas");
+                if (canvas) {
+                    canvas.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+                this.orbs.forEach((orb, index) => {
+                    if (orb) {
+                        const speed = 0.4 + index * 0.1;
+                        orb.style.transform = `translateY(${scrolled * speed}px)`;
+                    }
+                });
+                const content = document.querySelector(".parallax-layer-3");
+                if (content) {
+                    content.style.transform = `translateY(${scrolled * 0.15}px)`;
+                }
+            }
+
+            onMouseMove(e) {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                this.orbs.forEach((orb, index) => {
+                    if (orb) {
+                        const speed = 20 + index * 10;
+                        const x = (mouseX - 0.5) * speed;
+                        const y = (mouseY - 0.5) * speed;
+                        const scrollOffset = window.pageYOffset * (0.4 + index * 0.1);
+                        orb.style.transform = `translateY(${scrollOffset}px) translate(${x}px, ${y}px)`;
+                    }
+                });
+            }
+        }
+
+        // Animated Counter
+        class AnimatedCounter {
+            constructor(element, target, duration = 2000) {
+                this.element = element;
+                this.target = target;
+                this.duration = duration;
+                this.startValue = 0;
+                this.observed = false;
+            }
+
+            animate() {
+                if (this.observed) return;
+                this.observed = true;
+                const startTime = performance.now();
+                const step = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / this.duration, 1);
+                    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    const currentValue = Math.floor(
+                        this.startValue + (this.target - this.startValue) * easeProgress
+                    );
+                    this.element.textContent = currentValue;
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        this.element.textContent = this.target;
+                    }
+                };
+                requestAnimationFrame(step);
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Initialize Particle System
+            const canvas = document.getElementById("particlesCanvas");
+            new ParticleSystem(canvas);
+
+            // Typing Effect for subtitle
+            const typingText = new TypingEffect(
+                "typingText",
+                "إدارة الصيانة الذكية",
+                100
+            );
+            await typingText.start();
+
+            // Initialize Parallax
+            new ParallaxEffect();
+
+            // Hero Section Ripple Effect
+            const heroSection = document.querySelector(".hero-section");
+            const rippleContainer = document.getElementById("rippleContainer");
+
+            if (heroSection) {
+                heroSection.addEventListener("click", (e) => {
+                    const ripple = document.createElement("div");
+                    ripple.className = "ripple";
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    ripple.style.left = x + "px";
+                    ripple.style.top = y + "px";
+                    ripple.style.width = "100px";
+                    ripple.style.height = "100px";
+                    rippleContainer.appendChild(ripple);
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 1500);
+                });
+            }
+
+            // Animated Counters
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: "0px",
+            };
+
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const target = parseInt(element.getAttribute("data-target"));
+                        const counter = new AnimatedCounter(element, target);
+                        counter.animate();
+                        counterObserver.unobserve(element);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll(".stat-value").forEach((stat) => {
+                counterObserver.observe(stat);
+            });
+
+            // Button Glow Effect
+            const primaryBtn = document.getElementById("primaryBtn");
+            if (primaryBtn) {
+                primaryBtn.addEventListener("mousemove", (e) => {
+                    const rect = primaryBtn.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const glow = primaryBtn.querySelector(".button-glow");
+                    if (glow) {
+                        glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(168, 85, 247, 0.6), transparent 70%)`;
+                    }
+                });
+            }
+
+            // Smooth Scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute("href"));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                    }
+                });
+            });
+
+            // Section Reveal Animation
+            const sectionObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = "1";
+                            entry.target.style.transform = "translateY(0)";
+                        }
+                    });
+                },
+                {
+                    threshold: 0.2,
+                    rootMargin: "0px 0px -100px 0px",
+                }
+            );
+
+            document.querySelectorAll(".content-section").forEach((section) => {
+                section.style.opacity = "0";
+                section.style.transform = "translateY(50px)";
+                section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+                sectionObserver.observe(section);
+            });
+
+            // Particle Hint
+            setTimeout(() => {
+                const hint = document.createElement("div");
+                hint.className = "particle-hint";
+                hint.textContent = "انقر في أي مكان لإنشاء تأثيرات التموج";
+                hint.style.cssText = `
+                    position: fixed;
+                    bottom: 100px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    padding: 0.75rem 1.5rem;
+                    background: rgba(0, 0, 0, 0.8);
+                    border: 1px solid rgba(168, 85, 247, 0.5);
+                    border-radius: 9999px;
+                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 0.875rem;
+                    z-index: 100;
+                    animation: fadeInUp 0.5s ease-out, fadeOut 0.5s ease-out 3s forwards;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(hint);
+                setTimeout(() => {
+                    hint.remove();
+                }, 3500);
+            }, 3000);
+        });
+
+        // Add fadeOut animation if not already defined
+        if (!document.querySelector('style').textContent.includes('fadeOut')) {
+            const style = document.createElement("style");
+            style.textContent = `
+                @keyframes fadeOut {
+                    to {
+                        opacity: 0;
+                        transform: translateX(-50%) translateY(-20px);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>

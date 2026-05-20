@@ -1,0 +1,47 @@
+# ========== UberFix Landing .gitignore ==========
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Node.js
+node_modules/
+.pnpm-store/
+npm-debug.log*
+
+# Environment
+.env.local
+.env.production
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+
+# Images (احتفظ بالصور المحلية)
+# public/images/  # لو عايز تحتفظ بالصور
+
+# Backup
+*.backupandroid/
+deploy.sh
+release-key.jks
+pnpm-lock.yaml

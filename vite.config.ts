@@ -1,0 +1,132 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+import { componentTagger } from "lovable-tagger";
+import { VitePWA } from "vite-plugin-pwa";
+
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
+  server: {
+    host: "::",
+    port: 8080,
+  },
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+    VitePWA({
+      registerType: "autoUpdate",
+      includeAssets: ["favicon.ico", "icons/*.png", "upload/*.jpg", "upload/*.png", "upload/*.gif"],
+      manifest: {
+        name: "UberFix - نظام إدارة الصيانة",
+        short_name: "UberFix",
+        description: "منصة متكاملة لإدارة طلبات الصيانة في مصر. نربط العملاء بالفنيين المحترفين.",
+        theme_color: "#1e3a5f",
+        background_color: "#ffffff",
+        display: "standalone",
+        orientation: "portrait",
+        scope: "/",
+        start_url: "/",
+        dir: "rtl",
+        lang: "ar",
+        icons: [
+          {
+             src: "/icons/app-icon-192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any"
+          },
+          {
+             src: "/icons/app-icon-512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable"
+           },
+           {
+             src: "/icons/app-icon-48.png",
+             sizes: "48x48",
+             type: "image/png",
+             purpose: "any"
+           },
+           {
+             src: "/icons/app-icon-72.png",
+             sizes: "72x72",
+             type: "image/png",
+             purpose: "any"
+           },
+           {
+             src: "/icons/app-icon-96.png",
+             sizes: "96x96",
+             type: "image/png",
+             purpose: "any"
+           },
+           {
+             src: "/icons/app-icon-144.png",
+             sizes: "144x144",
+             type: "image/png",
+             purpose: "any"
+          }
+        ],
+        screenshots: [
+          {
+            src: "/upload/uber-hero.jpg",
+            sizes: "1920x1080",
+            type: "image/jpeg",
+            form_factor: "wide"
+          }
+        ],
+        categories: ["utilities", "productivity", "business"]
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,jpg,jpeg,svg,woff,woff2}"],
+        globIgnores: ["**/upload/*.gif", "**/upload/uber-hero.gif"],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "gstatic-fonts-cache",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: /\/upload\/.*\.(gif|mp4|webm)$/i,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "large-media-cache",
+              expiration: {
+                maxEntries: 5,
+                maxAgeSeconds: 60 * 60 * 24 * 7
+              }
+            }
+          }
+        ]
+      }
+    })
+  ].filter(Boolean),
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+}));
