@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import HeroUberFix from "@/components/HeroUberFix";
+import VoiceAgentShowcase from "@/components/azvoice/VoiceAgentShowcase";
 import Statistics from "@/components/Statistics";
 import Features from "@/components/Features";
 import AppPromo from "@/components/AppPromo";
@@ -21,6 +22,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <HeroUberFix />
+      <VoiceAgentShowcase />
       <Statistics />
       <Features />
 
