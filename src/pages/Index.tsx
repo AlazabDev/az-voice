@@ -1,6 +1,9 @@
 import Navigation from "@/components/Navigation";
 import HeroUberFix from "@/components/HeroUberFix";
 import VoiceAgentShowcase from "@/components/azvoice/VoiceAgentShowcase";
+import VoiceAgentHowItWorks from "@/components/azvoice/VoiceAgentHowItWorks";
+import VoiceAgentIndustries from "@/components/azvoice/VoiceAgentIndustries";
+import VoiceAgentStats from "@/components/azvoice/VoiceAgentStats";
 import Statistics from "@/components/Statistics";
 import Features from "@/components/Features";
 import AppPromo from "@/components/AppPromo";
@@ -23,6 +26,9 @@ const Index = () => {
       <Navigation />
       <HeroUberFix />
       <VoiceAgentShowcase />
+      <VoiceAgentHowItWorks />
+      <VoiceAgentIndustries />
+      <VoiceAgentStats />
       <Statistics />
       <Features />
 
