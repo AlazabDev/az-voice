@@ -10,8 +10,9 @@ import SEOHead from "@/components/SEOHead";
 import ScrollToTop from "@/components/ScrollToTop";
 import PageTransition from "@/components/PageTransition";
 
-// Eager load the main page (AzVoice landing)
-import AzVoice from "./pages/AzVoice";
+// Eager load the main page (AzVoico landing)
+import AzVoico from "./pages/AzVoico";
+const AzVoice = lazy(() => import("./pages/AzVoice"));
 const Index = lazy(() => import("./pages/Index"));
 
 // Lazy load all other pages
@@ -69,7 +70,8 @@ const App = () => (
           <ScrollToTop />
           <AnimatePresence mode="wait">
             <Routes>
-              <Route path="/" element={<PageTransition><AzVoice /></PageTransition>} />
+              <Route path="/" element={<PageTransition><AzVoico /></PageTransition>} />
+              <Route path="/azvoice" element={<LazyPage><AzVoice /></LazyPage>} />
               <Route path="/uberfix" element={<LazyPage><Index /></LazyPage>} />
               <Route path="/services" element={<LazyPage><Services /></LazyPage>} />
               <Route path="/projects" element={<LazyPage><Projects /></LazyPage>} />
