@@ -137,7 +137,7 @@ const Header = () => {
           >
             Book Demo
           </a>
-          <Button className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 text-white border-0 rounded-full px-5">
+          <Button className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full px-5 text-slate-50 bg-orange-400 border-0">
             Start Free
           </Button>
         </div>
@@ -165,7 +165,7 @@ const Header = () => {
               </a>
             );
           })}
-          <Button className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-full">
+          <Button className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full text-slate-50 bg-orange-400 border-0">
             Start Free
           </Button>
         </div>
@@ -191,7 +191,7 @@ const Hero = () => (
         <SectionLabel>AI Customer Support, simplified</SectionLabel>
         <h1 className="mt-5 text-4xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight">
           Build AI Customer Support{" "}
-          <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-orange-400">
             Agents
           </span>{" "}
           for Your Business
@@ -201,7 +201,7 @@ const Hero = () => (
           organize conversations, and work 24/7 across your website, WhatsApp, and support channels.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button size="lg" className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 text-white rounded-full px-6 h-12">
+          <Button size="lg" className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full px-6 h-12 text-slate-50 bg-orange-400">
             Create Your Agent <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
           <Button size="lg" variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10 rounded-full px-6 h-12">
