@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import azvoiceLogo from "@/assets/azvoice-logo.png";
 import {
@@ -39,6 +39,9 @@ import {
   Wrench,
   Store,
 } from "lucide-react";
+
+// Brand accent — visible across CTAs, badges and key highlights
+const GOLD = "#FFB900";
 
 /* -----------------------------------------------------------
    AzVoico — Standalone landing page
