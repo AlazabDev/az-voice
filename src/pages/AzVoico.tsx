@@ -78,7 +78,7 @@ const Logo = () => (
       className="w-9 h-9 rounded-xl object-contain"
     />
     <span className="text-xl font-bold text-white tracking-tight">
-      Az<span className="text-[#38BDF8]">Voico</span>
+      Az<span className="text-[#FFB900]">Voico</span>
     </span>
   </a>
 );
@@ -140,7 +140,7 @@ const Header = () => {
           >
             Book Demo
           </a>
-          <Button className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full px-5 text-slate-50 bg-orange-400 border-0">
+          <Button className="bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full px-5 border-0 shadow-[0_8px_24px_-8px_rgba(255,185,0,0.6)]">
             Start Free
           </Button>
         </div>
@@ -168,7 +168,7 @@ const Header = () => {
               </a>
             );
           })}
-          <Button className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full text-slate-50 bg-orange-400 border-0">
+          <Button className="w-full bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full border-0">
             Start Free
           </Button>
         </div>
@@ -178,7 +178,7 @@ const Header = () => {
 };
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-[#38BDF8]">
+  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FFB900]/30 bg-[#FFB900]/10 text-xs font-medium text-[#FFB900]">
     <Sparkles className="w-3.5 h-3.5" /> {children}
   </div>
 );
@@ -194,9 +194,7 @@ const Hero = () => (
         <SectionLabel>AI Customer Support, simplified</SectionLabel>
         <h1 className="mt-5 text-4xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight">
           Build AI Customer Support{" "}
-          <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-orange-400">
-            Agents
-          </span>{" "}
+          <span className="text-[#FFB900]">Agents</span>{" "}
           for Your Business
         </h1>
         <p className="mt-6 text-lg text-[#A1A1AA] max-w-xl leading-relaxed">
@@ -204,7 +202,7 @@ const Hero = () => (
           organize conversations, and work 24/7 across your website, WhatsApp, and support channels.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button size="lg" className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full px-6 h-12 text-slate-50 bg-orange-400">
+          <Button size="lg" className="bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full px-6 h-12 shadow-[0_10px_30px_-10px_rgba(255,185,0,0.6)]">
             Create Your Agent <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
           <Button size="lg" variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10 rounded-full px-6 h-12">
