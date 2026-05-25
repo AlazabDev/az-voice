@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import azvoiceLogo from "@/assets/azvoice-logo.png";
 import {
@@ -40,6 +40,9 @@ import {
   Store,
 } from "lucide-react";
 
+// Brand accent — visible across CTAs, badges and key highlights
+const GOLD = "#FFB900";
+
 /* -----------------------------------------------------------
    AzVoico — Standalone landing page
    Design system is local to this page (dark SaaS aesthetic).
@@ -75,7 +78,7 @@ const Logo = () => (
       className="w-9 h-9 rounded-xl object-contain"
     />
     <span className="text-xl font-bold text-white tracking-tight">
-      Az<span className="text-[#38BDF8]">Voico</span>
+      Az<span className="text-[#FFB900]">Voico</span>
     </span>
   </a>
 );
@@ -137,7 +140,7 @@ const Header = () => {
           >
             Book Demo
           </a>
-          <Button className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full px-5 text-slate-50 bg-orange-400 border-0">
+          <Button className="bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full px-5 border-0 shadow-[0_8px_24px_-8px_rgba(255,185,0,0.6)]">
             Start Free
           </Button>
         </div>
@@ -165,7 +168,7 @@ const Header = () => {
               </a>
             );
           })}
-          <Button className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full text-slate-50 bg-orange-400 border-0">
+          <Button className="w-full bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full border-0">
             Start Free
           </Button>
         </div>
@@ -175,7 +178,7 @@ const Header = () => {
 };
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-[#38BDF8]">
+  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FFB900]/30 bg-[#FFB900]/10 text-xs font-medium text-[#FFB900]">
     <Sparkles className="w-3.5 h-3.5" /> {children}
   </div>
 );
@@ -191,9 +194,7 @@ const Hero = () => (
         <SectionLabel>AI Customer Support, simplified</SectionLabel>
         <h1 className="mt-5 text-4xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight">
           Build AI Customer Support{" "}
-          <span className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] bg-clip-text text-orange-400">
-            Agents
-          </span>{" "}
+          <span className="text-[#FFB900]">Agents</span>{" "}
           for Your Business
         </h1>
         <p className="mt-6 text-lg text-[#A1A1AA] max-w-xl leading-relaxed">
@@ -201,7 +202,7 @@ const Hero = () => (
           organize conversations, and work 24/7 across your website, WhatsApp, and support channels.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button size="lg" className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 rounded-full px-6 h-12 text-slate-50 bg-orange-400">
+          <Button size="lg" className="bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full px-6 h-12 shadow-[0_10px_30px_-10px_rgba(255,185,0,0.6)]">
             Create Your Agent <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
           <Button size="lg" variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10 rounded-full px-6 h-12">
@@ -712,6 +713,228 @@ const Trust = () => (
   </section>
 );
 
+const demoScenarios = [
+  {
+    q: "What are your business hours?",
+    a: "We're open daily from 9 AM to 9 PM. Need to schedule a visit outside these hours? I can request a special slot.",
+  },
+  {
+    q: "Do you offer same-day delivery?",
+    a: "Yes — orders placed before 3 PM ship today. Share your area and I'll confirm the exact ETA.",
+  },
+  {
+    q: "I want to book an appointment",
+    a: "Sure. Please share the service type, preferred day, and a phone number. I'll create the booking instantly.",
+  },
+  {
+    q: "Can I speak to a human?",
+    a: "Of course. I'm transferring you to our support team now — ticket #A2381 created with your conversation history.",
+  },
+];
+
+const InteractiveDemo = () => {
+  const [active, setActive] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const scenario = demoScenarios[active];
+
+  const pick = (i: number) => {
+    if (i === active) return;
+    setTyping(true);
+    setActive(i);
+    window.setTimeout(() => setTyping(false), 700);
+  };
+
+  return (
+    <section id="demo" className="py-20 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto">
+          <SectionLabel>Try it live</SectionLabel>
+          <h2 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight">
+            Click a question — watch your agent reply
+          </h2>
+          <p className="mt-4 text-[#A1A1AA]">
+            A glimpse of how AzVoico answers real customer questions in seconds.
+          </p>
+        </div>
+        <div className="mt-12 grid lg:grid-cols-2 gap-8 items-start">
+          <div className="space-y-3">
+            {demoScenarios.map((s, i) => (
+              <button
+                key={s.q}
+                onClick={() => pick(i)}
+                className={`w-full text-left p-4 rounded-xl border transition-all ${
+                  i === active
+                    ? "border-[#FFB900] bg-[#FFB900]/10 text-white"
+                    : "border-white/10 bg-white/5 text-white/80 hover:border-white/20 hover:bg-white/10"
+                }`}
+              >
+                <span className="text-xs uppercase tracking-wider text-[#FFB900] font-semibold">
+                  Prompt {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-1 text-sm">{s.q}</p>
+              </button>
+            ))}
+          </div>
+          <div className="relative">
+            <div className="absolute -inset-4 bg-[#FFB900]/10 blur-2xl rounded-3xl" />
+            <div className="relative rounded-2xl border border-white/10 bg-[#15171D]/90 backdrop-blur-xl shadow-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-[#FFB900] flex items-center justify-center">
+                    <Bot className="w-4 h-4 text-[#0F1115]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">AzVoico Agent</p>
+                    <p className="text-[10px] text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Live demo
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-5 space-y-4 min-h-[260px]">
+                <Bubble side="left">{scenario.q}</Bubble>
+                {typing ? (
+                  <div className="flex items-center gap-1.5 text-[#A1A1AA] text-xs">
+                    <span className="w-2 h-2 bg-[#FFB900] rounded-full animate-pulse" />
+                    <span className="w-2 h-2 bg-[#FFB900] rounded-full animate-pulse [animation-delay:120ms]" />
+                    <span className="w-2 h-2 bg-[#FFB900] rounded-full animate-pulse [animation-delay:240ms]" />
+                    <span className="ml-2">Agent is typing…</span>
+                  </div>
+                ) : (
+                  <Bubble side="right">{scenario.a}</Bubble>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ROICalculator = () => {
+  const [convos, setConvos] = useState(800);
+  const [agentCost, setAgentCost] = useState(600);
+  const [agents, setAgents] = useState(2);
+
+  const numbers = useMemo(() => {
+    const automated = Math.round(convos * 0.7);
+    const teamCost = agents * agentCost;
+    const azvoicoCost = 49;
+    const saved = Math.max(teamCost - azvoicoCost, 0);
+    const hours = Math.round(automated * 0.05);
+    return { automated, saved, hours };
+  }, [convos, agentCost, agents]);
+
+  return (
+    <section id="roi" className="py-20 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <SectionLabel>ROI calculator</SectionLabel>
+          <h2 className="mt-4 text-3xl md:text-5xl font-bold text-white tracking-tight">
+            See what AzVoico saves your team — instantly.
+          </h2>
+          <p className="mt-5 text-[#A1A1AA]">
+            Move the sliders to match your business. The numbers update in real time.
+          </p>
+          <div className="mt-8 space-y-6">
+            <SliderField
+              label="Customer messages / month"
+              value={convos}
+              suffix=""
+              min={100}
+              max={10000}
+              step={100}
+              onChange={setConvos}
+            />
+            <SliderField
+              label="Support agents on payroll"
+              value={agents}
+              suffix=""
+              min={1}
+              max={10}
+              step={1}
+              onChange={setAgents}
+            />
+            <SliderField
+              label="Monthly cost per agent ($)"
+              value={agentCost}
+              suffix="$"
+              min={200}
+              max={3000}
+              step={50}
+              onChange={setAgentCost}
+            />
+          </div>
+        </div>
+        <div className="relative">
+          <div className="absolute -inset-6 bg-[#FFB900]/10 blur-3xl rounded-3xl" />
+          <div className="relative grid grid-cols-2 gap-4 p-6 rounded-3xl border border-white/10 bg-white/5">
+            <StatCard label="Conversations automated" value={`${numbers.automated.toLocaleString()}`} />
+            <StatCard label="Hours saved / month" value={`${numbers.hours.toLocaleString()}h`} />
+            <div className="col-span-2 p-6 rounded-2xl bg-gradient-to-br from-[#FFB900]/20 to-transparent border border-[#FFB900]/30">
+              <p className="text-xs text-[#FFB900] uppercase tracking-wider font-semibold">
+                Estimated monthly savings
+              </p>
+              <p className="mt-2 text-4xl md:text-5xl font-bold text-white">
+                ${numbers.saved.toLocaleString()}
+              </p>
+              <p className="mt-2 text-xs text-[#A1A1AA]">
+                Compared to running a full human-only support team.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const SliderField = ({
+  label,
+  value,
+  min,
+  max,
+  step,
+  suffix,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  suffix: string;
+  onChange: (v: number) => void;
+}) => (
+  <div>
+    <div className="flex items-center justify-between mb-2">
+      <span className="text-sm text-[#A1A1AA]">{label}</span>
+      <span className="text-sm font-semibold text-[#FFB900]">
+        {suffix}
+        {value.toLocaleString()}
+      </span>
+    </div>
+    <input
+      type="range"
+      min={min}
+      max={max}
+      step={step}
+      value={value}
+      onChange={(e) => onChange(Number(e.target.value))}
+      className="w-full accent-[#FFB900]"
+    />
+  </div>
+);
+
+const StatCard = ({ label, value }: { label: string; value: string }) => (
+  <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+    <p className="text-xs text-[#A1A1AA]">{label}</p>
+    <p className="mt-2 text-2xl font-bold text-white">{value}</p>
+  </div>
+);
+
 const FinalCTA = () => (
   <section id="cta" className="py-20 border-t border-white/5">
     <div className="max-w-5xl mx-auto px-5 lg:px-8">
@@ -726,7 +949,7 @@ const FinalCTA = () => (
             organizing requests better, and serving customers 24/7.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-full px-7 h-12">
+            <Button size="lg" className="bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full px-7 h-12 shadow-[0_10px_30px_-10px_rgba(255,185,0,0.6)]">
               Create Your Agent <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
             <Button size="lg" variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10 rounded-full px-7 h-12">
@@ -821,8 +1044,10 @@ const AzVoico = () => {
         <Solution />
         <Features />
         <HowIt />
+        <InteractiveDemo />
         <UseCases />
         <Preview />
+        <ROICalculator />
         <Integrations />
         <Pricing />
         <Trust />
