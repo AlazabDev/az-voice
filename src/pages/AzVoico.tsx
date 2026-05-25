@@ -949,7 +949,7 @@ const FinalCTA = () => (
             organizing requests better, and serving customers 24/7.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-full px-7 h-12">
+            <Button size="lg" className="bg-[#FFB900] hover:bg-[#FFC830] text-[#0F1115] font-semibold rounded-full px-7 h-12 shadow-[0_10px_30px_-10px_rgba(255,185,0,0.6)]">
               Create Your Agent <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
             <Button size="lg" variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10 rounded-full px-7 h-12">
@@ -1044,8 +1044,10 @@ const AzVoico = () => {
         <Solution />
         <Features />
         <HowIt />
+        <InteractiveDemo />
         <UseCases />
         <Preview />
+        <ROICalculator />
         <Integrations />
         <Pricing />
         <Trust />
