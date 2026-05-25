@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import azvoiceLogo from "@/assets/azvoice-logo.png";
 import {
   Accordion,
   AccordionContent,
@@ -52,11 +53,27 @@ const nav = [
   { href: "#faq", label: "FAQ" },
 ];
 
+const smoothScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  if (!href.startsWith("#")) return;
+  const el = document.getElementById(href.slice(1));
+  if (!el) return;
+  e.preventDefault();
+  const top = el.getBoundingClientRect().top + window.scrollY - 72;
+  window.scrollTo({ top, behavior: "smooth" });
+  history.replaceState(null, "", href);
+};
+
 const Logo = () => (
-  <a href="#top" className="flex items-center gap-2 group">
-    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-[#2563EB]/30">
-      <Bot className="w-5 h-5 text-white" />
-    </div>
+  <a
+    href="#top"
+    onClick={(e) => smoothScrollTo(e, "#top")}
+    className="flex items-center gap-2 group"
+  >
+    <img
+      src={azvoiceLogo}
+      alt="AzVoico"
+      className="w-9 h-9 rounded-xl object-contain"
+    />
     <span className="text-xl font-bold text-white tracking-tight">
       Az<span className="text-[#38BDF8]">Voico</span>
     </span>
@@ -65,19 +82,61 @@ const Logo = () => (
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("top");
+
+  useEffect(() => {
+    const ids = ["top", ...nav.map((n) => n.href.slice(1))];
+    const targets = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target.id) setActive(visible.target.id);
+      },
+      { rootMargin: "-72px 0px -55% 0px", threshold: [0.1, 0.25, 0.5] }
+    );
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0F1115]/80 border-b border-white/5">
       <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
         <Logo />
         <nav className="hidden md:flex items-center gap-8">
-          {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm text-[#A1A1AA] hover:text-white transition-colors">
-              {n.label}
-            </a>
-          ))}
+          {nav.map((n) => {
+            const isActive = active === n.href.slice(1);
+            return (
+              <a
+                key={n.href}
+                href={n.href}
+                onClick={(e) => smoothScrollTo(e, n.href)}
+                className={`relative text-sm transition-colors ${
+                  isActive ? "text-white" : "text-[#A1A1AA] hover:text-white"
+                }`}
+              >
+                {n.label}
+                <span
+                  className={`absolute left-0 -bottom-1 h-0.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] transition-all duration-300 ${
+                    isActive ? "w-full opacity-100" : "w-0 opacity-0"
+                  }`}
+                />
+              </a>
+            );
+          })}
         </nav>
         <div className="hidden md:flex items-center gap-3">
-          <a href="#cta" className="text-sm text-[#A1A1AA] hover:text-white transition-colors">Book Demo</a>
+          <a
+            href="#cta"
+            onClick={(e) => smoothScrollTo(e, "#cta")}
+            className="text-sm text-[#A1A1AA] hover:text-white transition-colors"
+          >
+            Book Demo
+          </a>
           <Button className="bg-gradient-to-r from-[#2563EB] to-[#38BDF8] hover:opacity-90 text-white border-0 rounded-full px-5">
             Start Free
           </Button>
@@ -88,11 +147,24 @@ const Header = () => {
       </div>
       {open && (
         <div className="md:hidden border-t border-white/5 bg-[#0F1115] px-5 py-4 space-y-3">
-          {nav.map((n) => (
-            <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="block text-sm text-[#A1A1AA] hover:text-white">
-              {n.label}
-            </a>
-          ))}
+          {nav.map((n) => {
+            const isActive = active === n.href.slice(1);
+            return (
+              <a
+                key={n.href}
+                href={n.href}
+                onClick={(e) => {
+                  setOpen(false);
+                  smoothScrollTo(e, n.href);
+                }}
+                className={`block text-sm ${
+                  isActive ? "text-white font-semibold" : "text-[#A1A1AA] hover:text-white"
+                }`}
+              >
+                {n.label}
+              </a>
+            );
+          })}
           <Button className="w-full bg-gradient-to-r from-[#2563EB] to-[#38BDF8] text-white rounded-full">
             Start Free
           </Button>
