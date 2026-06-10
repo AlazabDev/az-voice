@@ -225,7 +225,7 @@ const Hero = () => (
             { icon: BookOpen, label: "Trained on You" },
           ].map((b) => (
             <div key={b.label} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10">
-              <b.icon className="w-4 h-4 text-[#030957]" />
+              <b.icon className="w-4 h-4 text-[#FFB900]" />
               <span className="text-xs text-white/90">{b.label}</span>
             </div>
           ))}
@@ -265,7 +265,7 @@ const ChatMockup = () => (
         </Bubble>
         <Bubble side="left">Cairo · AC repair · Tomorrow 5 PM</Bubble>
         <Bubble side="right">
-          Got it. Ticket <span className="text-[#030957]">#A2381</span> created and assigned to your area team.
+          Got it. Ticket <span className="text-[#FFB900]">#A2381</span> created and assigned to your area team.
         </Bubble>
         <div className="flex items-center gap-2 text-[#A1A1AA] text-xs">
           <span className="w-2 h-2 bg-[#030957] rounded-full animate-pulse" />
@@ -383,7 +383,7 @@ const Features = () => (
         {features.map((f) => (
           <div key={f.title} className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#030957]/40 transition-all hover:-translate-y-1">
             <div className="w-11 h-11 rounded-xl bg-[#030957]/20 border border-white/10 flex items-center justify-center mb-4">
-              <f.icon className="w-5 h-5 text-[#030957]" />
+              <f.icon className="w-5 h-5 text-[#FFB900]" />
             </div>
             <h3 className="text-white font-semibold">{f.title}</h3>
             <p className="mt-2 text-sm text-[#A1A1AA] leading-relaxed">{f.desc}</p>
@@ -446,7 +446,7 @@ const UseCases = () => (
       <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {useCases.map((u) => (
           <div key={u.t} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#030957]/40 transition-all">
-            <u.icon className="w-7 h-7 text-[#030957]" />
+            <u.icon className="w-7 h-7 text-[#FFB900]" />
             <h3 className="mt-4 text-white font-semibold">{u.t}</h3>
             <p className="mt-2 text-sm text-[#A1A1AA] leading-relaxed">{u.d}</p>
           </div>
@@ -520,7 +520,7 @@ const Preview = () => (
                   {["Sara — AC repair request", "Ahmed — Quote inquiry", "Layla — Booking update"].map((c) => (
                     <div key={c} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
                       <span className="text-sm text-white/90">{c}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#030957]/15 text-[#030957]">Active</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#FFB900]/15 text-[#FFB900]">Active</span>
                     </div>
                   ))}
                 </div>
@@ -596,7 +596,7 @@ const Integrations = () => (
               className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#030957]/40 transition"
             >
               <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                <it.i className="w-4 h-4 text-[#030957]" />
+                <it.i className="w-4 h-4 text-[#FFB900]" />
               </div>
               <span className="text-sm text-white/90">{it.l}</span>
             </div>
@@ -680,7 +680,7 @@ const Pricing = () => (
             <ul className="mt-6 space-y-2.5">
               {p.features.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-white/85">
-                  <Check className="w-4 h-4 text-[#030957] flex-shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-[#FFB900] flex-shrink-0 mt-0.5" />
                   <span>{f}</span>
                 </li>
               ))}
@@ -711,7 +711,7 @@ const Trust = () => (
           { i: Workflow, t: "Scalable for growth", d: "Add agents, channels, and automations anytime." },
         ].map((c) => (
           <div key={c.t} className="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <c.i className="w-6 h-6 text-[#030957]" />
+            <c.i className="w-6 h-6 text-[#FFB900]" />
             <h3 className="mt-3 text-white font-semibold">{c.t}</h3>
             <p className="mt-1 text-sm text-[#A1A1AA]">{c.d}</p>
           </div>
