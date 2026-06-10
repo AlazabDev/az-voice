@@ -124,7 +124,7 @@ const Header = () => {
               >
                 {n.label}
                 <span
-                  className={`absolute left-0 -bottom-1 h-0.5 rounded-full bg-[#2563EB] transition-all duration-300 ${
+                  className={`absolute left-0 -bottom-1 h-0.5 rounded-full bg-[#030957] transition-all duration-300 ${
                     isActive ? "w-full opacity-100" : "w-0 opacity-0"
                   }`}
                 />
@@ -186,8 +186,8 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
 const Hero = () => (
   <section id="top" className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-24">
     <div className="absolute inset-0 -z-10">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-[#2563EB]/20 blur-[160px]" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-[#2563EB]/10 blur-[140px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-[#030957]/20 blur-[160px]" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-[#030957]/10 blur-[140px]" />
     </div>
     <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
       <div>
@@ -217,7 +217,7 @@ const Hero = () => (
             { icon: BookOpen, label: "Trained on You" },
           ].map((b) => (
             <div key={b.label} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10">
-              <b.icon className="w-4 h-4 text-[#2563EB]" />
+              <b.icon className="w-4 h-4 text-[#030957]" />
               <span className="text-xs text-white/90">{b.label}</span>
             </div>
           ))}
@@ -230,11 +230,11 @@ const Hero = () => (
 
 const ChatMockup = () => (
   <div className="relative">
-    <div className="absolute -inset-4 bg-[#2563EB]/25 blur-2xl rounded-3xl" />
+    <div className="absolute -inset-4 bg-[#030957]/25 blur-2xl rounded-3xl" />
     <div className="relative rounded-2xl border border-white/10 bg-[#15171D]/90 backdrop-blur-xl shadow-2xl overflow-hidden">
       <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#2563EB] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-[#030957] flex items-center justify-center">
             <Bot className="w-4 h-4 text-white" />
           </div>
           <div>
@@ -257,10 +257,10 @@ const ChatMockup = () => (
         </Bubble>
         <Bubble side="left">Cairo · AC repair · Tomorrow 5 PM</Bubble>
         <Bubble side="right">
-          Got it. Ticket <span className="text-[#2563EB]">#A2381</span> created and assigned to your area team.
+          Got it. Ticket <span className="text-[#030957]">#A2381</span> created and assigned to your area team.
         </Bubble>
         <div className="flex items-center gap-2 text-[#A1A1AA] text-xs">
-          <span className="w-2 h-2 bg-[#2563EB] rounded-full animate-pulse" />
+          <span className="w-2 h-2 bg-[#030957] rounded-full animate-pulse" />
           Agent is typing…
         </div>
       </div>
@@ -273,7 +273,7 @@ const Bubble = ({ side, children }: { side: "left" | "right"; children: React.Re
     <div
       className={`max-w-[80%] text-sm px-4 py-2.5 rounded-2xl ${
         side === "right"
-          ? "bg-[#2563EB] text-white rounded-br-sm"
+          ? "bg-[#F1F5F9] text-[#0F1115] rounded-br-sm"
           : "bg-white/5 text-white/90 border border-white/10 rounded-bl-sm"
       }`}
     >
@@ -337,7 +337,7 @@ const Solution = () => (
           "Trains on documents, FAQs, and knowledge",
         ].map((s) => (
           <li key={s} className="flex items-start gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
-            <div className="w-6 h-6 rounded-full bg-[#2563EB] flex items-center justify-center flex-shrink-0">
+            <div className="w-6 h-6 rounded-full bg-[#030957] flex items-center justify-center flex-shrink-0">
               <Check className="w-3.5 h-3.5 text-white" />
             </div>
             <span className="text-white/90 text-sm">{s}</span>
@@ -373,9 +373,9 @@ const Features = () => (
       </div>
       <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {features.map((f) => (
-          <div key={f.title} className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#2563EB]/40 transition-all hover:-translate-y-1">
-            <div className="w-11 h-11 rounded-xl bg-[#2563EB]/20 border border-white/10 flex items-center justify-center mb-4">
-              <f.icon className="w-5 h-5 text-[#2563EB]" />
+          <div key={f.title} className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#030957]/40 transition-all hover:-translate-y-1">
+            <div className="w-11 h-11 rounded-xl bg-[#030957]/20 border border-white/10 flex items-center justify-center mb-4">
+              <f.icon className="w-5 h-5 text-[#030957]" />
             </div>
             <h3 className="text-white font-semibold">{f.title}</h3>
             <p className="mt-2 text-sm text-[#A1A1AA] leading-relaxed">{f.desc}</p>
@@ -437,8 +437,8 @@ const UseCases = () => (
       </div>
       <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {useCases.map((u) => (
-          <div key={u.t} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#2563EB]/40 transition-all">
-            <u.icon className="w-7 h-7 text-[#2563EB]" />
+          <div key={u.t} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#030957]/40 transition-all">
+            <u.icon className="w-7 h-7 text-[#030957]" />
             <h3 className="mt-4 text-white font-semibold">{u.t}</h3>
             <p className="mt-2 text-sm text-[#A1A1AA] leading-relaxed">{u.d}</p>
           </div>
@@ -488,7 +488,7 @@ const Preview = () => (
             <main className="col-span-12 md:col-span-9 p-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-white font-semibold">Dashboard</h3>
-                <Button size="sm" className="bg-[#2563EB] text-white rounded-full">
+                <Button size="sm" className="bg-[#030957] text-white rounded-full">
                   + New Agent
                 </Button>
               </div>
@@ -512,7 +512,7 @@ const Preview = () => (
                   {["Sara — AC repair request", "Ahmed — Quote inquiry", "Layla — Booking update"].map((c) => (
                     <div key={c} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
                       <span className="text-sm text-white/90">{c}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#2563EB]/15 text-[#2563EB]">Active</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#030957]/15 text-[#030957]">Active</span>
                     </div>
                   ))}
                 </div>
@@ -531,7 +531,7 @@ const Preview = () => (
                       </div>
                       <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
                         <div
-                          className="h-full bg-[#2563EB]"
+                          className="h-full bg-[#030957]"
                           style={{ width: `${b.v}%` }}
                         />
                       </div>
@@ -585,10 +585,10 @@ const Integrations = () => (
           {integrations.map((it) => (
             <div
               key={it.l}
-              className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#2563EB]/40 transition"
+              className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#030957]/40 transition"
             >
               <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                <it.i className="w-4 h-4 text-[#2563EB]" />
+                <it.i className="w-4 h-4 text-[#030957]" />
               </div>
               <span className="text-sm text-white/90">{it.l}</span>
             </div>
@@ -645,12 +645,12 @@ const Pricing = () => (
             key={p.name}
             className={`relative p-8 rounded-3xl border ${
               p.highlight
-                ? "border-[#2563EB]/40 bg-gradient-to-b from-[#2563EB]/15 to-transparent"
+                ? "border-[#030957]/40 bg-gradient-to-b from-[#030957]/15 to-transparent"
                 : "border-white/10 bg-white/5"
             }`}
           >
             {p.highlight && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-medium bg-[#2563EB] text-white">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-medium bg-[#030957] text-white">
                 Most popular
               </span>
             )}
@@ -663,7 +663,7 @@ const Pricing = () => (
             <Button
               className={`mt-6 w-full rounded-full ${
                 p.highlight
-                  ? "bg-[#2563EB] text-white"
+                  ? "bg-[#030957] text-white"
                   : "bg-white/10 hover:bg-white/15 text-white border border-white/10"
               }`}
             >
@@ -672,7 +672,7 @@ const Pricing = () => (
             <ul className="mt-6 space-y-2.5">
               {p.features.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-white/85">
-                  <Check className="w-4 h-4 text-[#2563EB] flex-shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-[#030957] flex-shrink-0 mt-0.5" />
                   <span>{f}</span>
                 </li>
               ))}
@@ -703,7 +703,7 @@ const Trust = () => (
           { i: Workflow, t: "Scalable for growth", d: "Add agents, channels, and automations anytime." },
         ].map((c) => (
           <div key={c.t} className="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <c.i className="w-6 h-6 text-[#2563EB]" />
+            <c.i className="w-6 h-6 text-[#030957]" />
             <h3 className="mt-3 text-white font-semibold">{c.t}</h3>
             <p className="mt-1 text-sm text-[#A1A1AA]">{c.d}</p>
           </div>
@@ -939,7 +939,7 @@ const FinalCTA = () => (
   <section id="cta" className="py-20 border-t border-white/5">
     <div className="max-w-5xl mx-auto px-5 lg:px-8">
       <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#030957] p-10 md:p-14 text-center">
-        <div className="absolute -top-20 -right-20 w-72 h-72 bg-[#2563EB]/30 blur-3xl rounded-full" />
+        <div className="absolute -top-20 -right-20 w-72 h-72 bg-[#030957]/30 blur-3xl rounded-full" />
         <div className="relative">
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
             Your first AI support agent is closer than you think.
