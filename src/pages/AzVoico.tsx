@@ -273,7 +273,7 @@ const Bubble = ({ side, children }: { side: "left" | "right"; children: React.Re
     <div
       className={`max-w-[80%] text-sm px-4 py-2.5 rounded-2xl ${
         side === "right"
-          ? "bg-[#030957] text-white rounded-br-sm"
+          ? "bg-[#F1F5F9] text-[#0F1115] rounded-br-sm"
           : "bg-white/5 text-white/90 border border-white/10 rounded-bl-sm"
       }`}
     >
