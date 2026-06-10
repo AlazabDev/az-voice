@@ -403,7 +403,7 @@ const HowIt = () => (
           { n: "04", t: "Start Supporting", d: "Receive conversations, organize requests, and respond in seconds." },
         ].map((s) => (
           <div key={s.n} className="relative p-6 rounded-2xl bg-white/5 border border-white/10">
-            <div className="text-5xl font-bold bg-[#2563EB] bg-clip-text text-transparent">
+            <div className="text-5xl font-bold text-[#FFB900]">
               {s.n}
             </div>
             <h3 className="mt-3 text-white font-semibold">{s.t}</h3>
