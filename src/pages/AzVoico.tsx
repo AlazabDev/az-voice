@@ -133,6 +133,8 @@ const Header = () => {
           })}
         </nav>
         <div className="hidden md:flex items-center gap-3">
+          <LanguageSwitcher />
+          <ThemeToggle />
           <a
             href="#cta"
             onClick={(e) => smoothScrollTo(e, "#cta")}
@@ -144,9 +146,13 @@ const Header = () => {
             Start Free
           </Button>
         </div>
-        <button className="md:hidden text-white" onClick={() => setOpen(!open)} aria-label="menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <LanguageSwitcher />
+          <ThemeToggle />
+          <button className="text-white" onClick={() => setOpen(!open)} aria-label="menu">
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
       {open && (
         <div className="md:hidden border-t border-white/5 bg-[#0F1115] px-5 py-4 space-y-3">
