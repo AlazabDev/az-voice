@@ -15,6 +15,7 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeToggle from "./ThemeToggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -159,6 +160,9 @@ const Navigation = () => {
             <div className="flex items-center h-full">
               <LanguageSwitcher />
             </div>
+            <div className="flex items-center h-full">
+              <ThemeToggle />
+            </div>
 
             <Button
               size="sm"
@@ -174,6 +178,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
             <LanguageSwitcher />
+            <ThemeToggle />
             <button
               className="text-white"
               onClick={() => setIsOpen(!isOpen)}
