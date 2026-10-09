@@ -41,6 +41,14 @@ const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const ChatBotSettings = lazy(() => import("./pages/ChatBotSettings"));
 const MaintenanceRequest = lazy(() => import("./pages/MaintenanceRequest"));
+const AuthPage = lazy(() => import("./pages/Auth"));
+const AppLayout = lazy(() => import("./components/app/AppLayout"));
+const AppOverview = lazy(() => import("./pages/app/Overview"));
+const AppAgents = lazy(() => import("./pages/app/Agents"));
+const AppTraining = lazy(() => import("./pages/app/Training"));
+const AppConversations = lazy(() => import("./pages/app/Conversations"));
+const AppKnowledge = lazy(() => import("./pages/app/Knowledge"));
+const AppSettings = lazy(() => import("./pages/app/Settings"));
 
 const queryClient = new QueryClient();
 
@@ -97,6 +105,16 @@ const App = () => (
               <Route path="/dashboard" element={<LazyPage><Dashboard /></LazyPage>} />
               <Route path="/chatbot-settings" element={<LazyPage><ChatBotSettings /></LazyPage>} />
               <Route path="/maintenance-request" element={<LazyPage><MaintenanceRequest /></LazyPage>} />
+              <Route path="/auth" element={<LazyPage><AuthPage /></LazyPage>} />
+              <Route path="/app" element={<Suspense fallback={<PageLoader />}><AppLayout /></Suspense>}>
+                <Route index element={<AppOverview />} />
+                <Route path="agents" element={<AppAgents />} />
+                <Route path="training" element={<AppTraining />} />
+                <Route path="training/:id" element={<AppTraining />} />
+                <Route path="conversations" element={<AppConversations />} />
+                <Route path="knowledge" element={<AppKnowledge />} />
+                <Route path="settings" element={<AppSettings />} />
+              </Route>
               <Route path="*" element={<LazyPage><NotFound /></LazyPage>} />
             </Routes>
           </AnimatePresence>
