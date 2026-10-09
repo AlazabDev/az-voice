@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { channelLabel, convStatusLabel } from "@/lib/app-data";
 
 const count = async (table: "agents" | "agent_conversations" | "knowledge_items", filter?: [string, string]) => {
-  let q = supabase.from(table).select("id", { count: "exact", head: true });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let q: any = (supabase.from(table) as any).select("id", { count: "exact", head: true });
   if (filter) q = q.eq(filter[0], filter[1]);
   const { count } = await q;
   return count ?? 0;
