@@ -14,6 +14,101 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_conversations: {
+        Row: {
+          agent_id: string | null
+          channel: string
+          created_at: string
+          customer_name: string | null
+          customer_phone: string | null
+          duration_seconds: number | null
+          id: string
+          status: string
+          summary: string | null
+          transcript: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          agent_id?: string | null
+          channel?: string
+          created_at?: string
+          customer_name?: string | null
+          customer_phone?: string | null
+          duration_seconds?: number | null
+          id?: string
+          status?: string
+          summary?: string | null
+          transcript?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          agent_id?: string | null
+          channel?: string
+          created_at?: string
+          customer_name?: string | null
+          customer_phone?: string | null
+          duration_seconds?: number | null
+          id?: string
+          status?: string
+          summary?: string | null
+          transcript?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_conversations_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agents: {
+        Row: {
+          created_at: string
+          description: string | null
+          greeting: string | null
+          id: string
+          instructions: string | null
+          language: string
+          name: string
+          status: string
+          updated_at: string
+          user_id: string
+          voice: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          greeting?: string | null
+          id?: string
+          instructions?: string | null
+          language?: string
+          name: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          voice?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          greeting?: string | null
+          id?: string
+          instructions?: string | null
+          language?: string
+          name?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          voice?: string
+        }
+        Relationships: []
+      }
       chat_conversations: {
         Row: {
           id: string
@@ -75,6 +170,74 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      knowledge_items: {
+        Row: {
+          agent_id: string | null
+          category: string
+          content: string
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          agent_id?: string | null
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          agent_id?: string | null
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_items_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          company_name: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {
